@@ -1,0 +1,239 @@
+{
+    "angularObjects": {
+        "2AJXGMUUJ:shared_process": [],
+        "2AKK3QQXU:shared_process": [],
+        "2AM1YV5CU:shared_process": [],
+        "2ANGGHHMQ:shared_process": [],
+        "2BRWU4WXC:shared_process": []
+    },
+    "config": {
+        "looknfeel": "default",
+        "personalizedMode": "false"
+    },
+    "id": "2DN2TD8EM",
+    "info": {},
+    "name": "MySecondNote",
+    "paragraphs": [
+        {
+            "$$hashKey": "object:2181",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "scala"
+                },
+                "enabled": true,
+                "results": {},
+                "title": true
+            },
+            "dateCreated": "2018-08-02T20:36:09+0000",
+            "dateFinished": "2018-08-02T21:17:34+0000",
+            "dateStarted": "2018-08-02T21:17:33+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "focus": true,
+            "id": "20180802-203609_1335642095",
+            "jobName": "paragraph_1533242169792_623328842",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "FINISHED",
+            "text": "val df1 = Seq((1,\"anh\"),(2,\"tobi\"),(3,\"varun\")).toDF(\"id\",\"name\")\ndf1.show",
+            "title": "Create simple dataframe and show it",
+            "user": "anonymous"
+        },
+        {
+            "$$hashKey": "object:2182",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "scala"
+                },
+                "enabled": true,
+                "results": {},
+                "title": true
+            },
+            "dateCreated": "2018-08-02T20:36:48+0000",
+            "dateFinished": "2018-08-02T21:17:44+0000",
+            "dateStarted": "2018-08-02T21:17:33+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "id": "20180802-203648_1859854554",
+            "jobName": "paragraph_1533242208100_-1295921265",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "FINISHED",
+            "text": "val p2=\"s3a://605-us-charter-qa-stb-data/input/20180227/AM_D_SYSCODE*.gz\"\nval df = spark.read.format(\"csv\").option(\"delimiter\",\"|\").option(\"header\",false).load(p2)",
+            "title": "Load a dataframe from S3",
+            "user": "anonymous"
+        },
+        {
+            "$$hashKey": "object:2183",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "scala"
+                },
+                "enabled": true,
+                "results": {},
+                "title": true
+            },
+            "dateCreated": "2018-08-02T20:56:28+0000",
+            "dateFinished": "2018-08-02T21:17:45+0000",
+            "dateStarted": "2018-08-02T21:17:34+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "id": "20180802-205628_199979816",
+            "jobName": "paragraph_1533243388988_-481936564",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "FINISHED",
+            "text": "z.show(df)",
+            "title": "Show a dataframe with pretty format",
+            "user": "anonymous"
+        },
+        {
+            "$$hashKey": "object:2184",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "scala"
+                },
+                "enabled": true,
+                "results": {},
+                "title": true
+            },
+            "dateCreated": "2018-08-02T20:58:44+0000",
+            "dateFinished": "2018-08-02T21:17:46+0000",
+            "dateStarted": "2018-08-02T21:17:45+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "id": "20180802-205844_1916468514",
+            "jobName": "paragraph_1533243524052_-1689062430",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "ERROR",
+            "text": "import org.apache.commons.io.IOUtils\nimport java.net.URL\nimport java.nio.charset.Charset\n\nbank.registerTempTable(\"bank\")val bankText = sc.parallelize(\n    IOUtils.toString(\n        new URL(\"https://s3.amazonaws.com/apache-zeppelin/tutorial/bank/bank.csv\"),\n        Charset.forName(\"utf8\")).split(\"\\n\"))\n\ncase class Bank(age: Integer, job: String, marital: String, education: String, balance: Integer)\n\nval bank = bankText.map(s => s.split(\";\")).filter(s => s(0) != \"\\\"age\\\"\").map(\n    s => Bank(s(0).toInt, \n            s(1).replaceAll(\"\\\"\", \"\"),\n            s(2).replaceAll(\"\\\"\", \"\"),\n            s(3).replaceAll(\"\\\"\", \"\"),\n            s(5).replaceAll(\"\\\"\", \"\").toInt\n        )\n).toDF()\nbank.createOrReplaceTempView(\"bank\")",
+            "title": "Load a dataframe from public S3 and register sql table",
+            "user": "anonymous"
+        },
+        {
+            "$$hashKey": "object:2185",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/scala",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "scala"
+                },
+                "enabled": true,
+                "results": {}
+            },
+            "dateCreated": "2018-08-02T21:06:43+0000",
+            "dateFinished": "2018-08-02T21:17:46+0000",
+            "dateStarted": "2018-08-02T21:17:46+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "id": "20180802-210643_1974078697",
+            "jobName": "paragraph_1533244003630_2052891002",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "FINISHED",
+            "text": "z.show(bank)",
+            "user": "anonymous"
+        },
+        {
+            "$$hashKey": "object:2186",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/sql",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "sql"
+                },
+                "enabled": true,
+                "results": {
+                    "0": {
+                        "graph": {
+                            "height": 300,
+                            "mode": "multiBarChart",
+                            "optionOpen": false
+                        },
+                        "helium": {}
+                    }
+                },
+                "title": true
+            },
+            "dateCreated": "2018-08-02T21:07:16+0000",
+            "dateFinished": "2018-08-02T21:17:49+0000",
+            "dateStarted": "2018-08-02T21:17:46+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "id": "20180802-210716_1459593126",
+            "jobName": "paragraph_1533244036952_1018163292",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "FINISHED",
+            "text": "%sql \nselect age, count(1) value\nfrom bank \nwhere age < 30 \ngroup by age",
+            "title": "Query temp table using sql and render it as graph",
+            "user": "anonymous"
+        },
+        {
+            "$$hashKey": "object:2187",
+            "apps": [],
+            "config": {
+                "colWidth": 12,
+                "editorMode": "ace/mode/sql",
+                "editorSetting": {
+                    "editOnDblClick": false,
+                    "language": "sql"
+                },
+                "enabled": true,
+                "results": {}
+            },
+            "dateCreated": "2018-08-02T21:07:56+0000",
+            "dateUpdated": "2018-08-02T21:17:33+0000",
+            "errorMessage": "",
+            "id": "20180802-210756_1100217620",
+            "jobName": "paragraph_1533244076956_-1389934102",
+            "progressUpdateIntervalMs": 500,
+            "settings": {
+                "forms": {},
+                "params": {}
+            },
+            "status": "FINISHED",
+            "text": "%sql\n",
+            "user": "anonymous"
+        }
+    ]
+}
